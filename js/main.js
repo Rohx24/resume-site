@@ -307,11 +307,37 @@ if (hint && coarse) hint.querySelector('b').textContent = 'tap';
 function dismissHint(){ hint && hint.classList.add('gone'); }
 setTimeout(dismissHint, 10000);
 
+/* ---- ambient interface sound (synthesized, off by default) ---- */
+let soundOn = false;
+let actx = null;
+function blip(freq, dur = 0.06, gain = 0.03, type = 'sine'){
+  if (!soundOn) return;
+  try {
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume();
+    const o = actx.createOscillator(), g = actx.createGain(), t = actx.currentTime;
+    o.type = type; o.frequency.value = freq;
+    o.connect(g); g.connect(actx.destination);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(gain, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.start(t); o.stop(t + dur + 0.02);
+  } catch (_) {}
+}
+const soundBtn = document.getElementById('sound');
+soundBtn?.addEventListener('click', () => {
+  soundOn = !soundOn;
+  soundBtn.classList.toggle('on', soundOn);
+  soundBtn.setAttribute('aria-pressed', String(soundOn));
+  soundBtn.title = soundOn ? 'Sound on' : 'Sound off';
+  if (soundOn){ blip(660, 0.08, 0.04); setTimeout(() => blip(990, 0.1, 0.035), 70); }
+});
+
 // click the empty space -> pin a node, wired into the same web
 addEventListener('click', e => {
   if (e.target.closest('a, button, input, [data-cursor], .panel, .hero-center, #topbar, #nav, #hint')) return;
   const p = screenToPlane(e.clientX, e.clientY);
-  if (p){ addPinned(p); dismissHint(); }
+  if (p){ addPinned(p); dismissHint(); blip(523.25, 0.09, 0.04); setTimeout(() => blip(783.99, 0.12, 0.03), 55); }
 });
 // double-click in the void clears the nodes you pinned
 addEventListener('dblclick', e => {
@@ -344,6 +370,7 @@ if (!coarse){
     cursor.classList.remove('is-link', 'is-tilt', 'has-label');
     cLabel.textContent = '';
     if (!el) return;
+    blip(1320, 0.03, 0.012, 'triangle');   // soft hover tick
     const type = el.dataset.cursor || 'link';
     if (el.matches('a[href$=".pdf"], .resume-btn')){ cursor.classList.add('has-label'); cLabel.textContent = 'Get'; }
     else if (el.matches('a[target="_blank"]')){ cursor.classList.add('has-label'); cLabel.textContent = 'Open'; }

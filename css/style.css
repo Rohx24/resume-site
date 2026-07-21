@@ -207,6 +207,7 @@ body{ position:relative; }
   padding:1.6rem; background:rgba(255,255,255,0.02);
   transition:transform .5s var(--ease), border-color .5s var(--ease);
 }
+.xp-card + .xp-card{ margin-top:.9rem; }
 .xp-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; margin-bottom:1rem; }
 .xp-head h3{ font-size:clamp(17px,2vw,22px); font-weight:600; }
 .xp-org{ color:var(--accent); font-size:13px; margin-top:.3rem; }
@@ -378,6 +379,25 @@ body{ position:relative; }
 @media (prefers-reduced-motion:reduce){ #hint i{ animation:none; } }
 
 /* ============================================================
+   SOUND TOGGLE
+   ============================================================ */
+#sound{
+  position:fixed; right:1.5rem; bottom:1.4rem; z-index:6;
+  width:40px; height:40px; border-radius:50%;
+  border:1px solid var(--panel-bd); background:rgba(10,13,20,0.5);
+  backdrop-filter:blur(10px); color:var(--ink-dim);
+  display:flex; align-items:center; justify-content:center;
+  transition:color .3s var(--ease), border-color .3s var(--ease), background .3s var(--ease);
+}
+#sound:hover{ color:var(--ink); transform:translateY(-1px); }
+#sound.on{ color:var(--accent); border-color:var(--accent); background:rgba(79,227,255,0.08); box-shadow:var(--glow); }
+#sound .wave{ opacity:0; transition:opacity .3s var(--ease); }
+#sound.on .wave{ opacity:1; }
+#sound .slash{ opacity:1; transition:opacity .3s var(--ease); }
+#sound.on .slash{ opacity:0; }
+@media (max-width:560px){ #sound{ right:1rem; bottom:1rem; width:36px; height:36px; } }
+
+/* ============================================================
    CUSTOM CURSOR
    ============================================================ */
 #cursor{ position:fixed; top:0; left:0; z-index:50; pointer-events:none; mix-blend-mode:screen; }
@@ -442,4 +462,59 @@ body{ position:relative; }
 @media (prefers-reduced-motion:reduce){
   [data-anim]{ opacity:1 !important; transform:none !important; }
   .scroll-cue i{ animation:none; }
+}
+
+/* ============================================================
+   PRINT — linearize the scroll-film into a readable document
+   ============================================================ */
+@media print{
+  @page{ margin:14mm; }
+  /* remap the palette so var()-based colors read dark on white */
+  html{
+    --ink:#111 !important; --ink-dim:#333 !important; --ink-faint:#666 !important;
+    --accent:#0e6b8c !important; --accent-2:#0e6b8c !important; --accent-3:#0e6b8c !important;
+    --panel-bd:#ddd !important;
+  }
+  html, body{ background:#fff !important; color:#111 !important; overflow:visible !important; height:auto !important; }
+  /* drop everything that only makes sense on screen */
+  #gl, #grain, #vignette, #cursor, #hint, #nav, #progress, .scroll-cue, #spacer, #topbar, #sound{
+    display:none !important;
+  }
+  /* let the fixed film flow as a normal document */
+  #ui{ position:static !important; }
+  .chapter{
+    position:static !important; inset:auto !important;
+    opacity:1 !important; visibility:visible !important;
+    transform:none !important; filter:none !important;
+    display:block !important; min-height:auto !important;
+    padding:0 0 14px !important; page-break-inside:avoid;
+  }
+  .hidden-chapter[hidden]{ display:none !important; }
+  [data-anim]{ opacity:1 !important; transform:none !important; }
+
+  .panel, .hero-center{
+    background:#fff !important; border:none !important; box-shadow:none !important;
+    backdrop-filter:none !important; max-width:100% !important; padding:0 !important;
+    text-align:left !important; margin:0 auto !important;
+  }
+  .hero-title{ font-size:42px !important; color:#111 !important; }
+  .contact-title{ font-size:34px !important; }
+  .h-lg{ font-size:22px !important; color:#111 !important; }
+  .body-lg, .xp-body, .proj p, .award-list p{ color:#222 !important; }
+  .kicker, .eyebrow, .xp-org{ color:#0e6b8c !important; }
+
+  /* gradient / transparent text would vanish on white — force solid ink */
+  .hero-title .accent, .h-lg em, .stat b, .contact-title em, .award-rank{
+    -webkit-text-fill-color:#0e6b8c !important; color:#0e6b8c !important; background:none !important;
+  }
+  .hero-tags, .scroll-cue{ display:none !important; }
+
+  .skill-grid, .proj-grid{ display:block !important; }
+  .skill-cat, .proj, .xp-card, .award-list li{
+    border:1px solid #ddd !important; background:#fff !important;
+    page-break-inside:avoid; margin-bottom:8px !important; transform:none !important;
+  }
+  .chips span, .chips.sm span{ border:1px solid #ddd !important; background:#fff !important; color:#0e6b8c !important; }
+  .proj-tag{ background:#eef4f7 !important; color:#0e6b8c !important; }
+  a{ color:#0e6b8c !important; text-decoration:none; }
 }

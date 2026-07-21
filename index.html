@@ -6,8 +6,21 @@
   <title>Rohit Diggi — AI/ML Engineer & Full-Stack Developer</title>
   <meta name="description" content="Rohit Jaysheel Diggi — AI/ML Engineer, Full-Stack Developer and systems researcher. Agentic AI, LLMs, and network protocol research. A scroll-driven portfolio." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>◈</text></svg>" />
+
+  <!-- social share preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rohitdiggi.space/" />
+  <meta property="og:title" content="Rohit Diggi — AI/ML Engineer & Full-Stack Developer" />
+  <meta property="og:description" content="Agentic AI systems, full-stack products, and network protocol research. A scroll-driven portfolio." />
+  <meta property="og:image" content="https://rohitdiggi.space/assets/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rohit Diggi — AI/ML Engineer & Full-Stack Developer" />
+  <meta name="twitter:description" content="Agentic AI systems, full-stack products, and network protocol research. A scroll-driven portfolio." />
+  <meta name="twitter:image" content="https://rohitdiggi.space/assets/og.png" />
   <link rel="stylesheet" href="fonts/fonts.css" />
-  <link rel="stylesheet" href="css/style.css?v=2" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
   <script type="importmap">
     { "imports": { "three": "./lib/three.module.js" } }
   </script>
@@ -31,6 +44,16 @@
 
   <!-- easter egg hint -->
   <div id="hint" aria-hidden="true"><i>✦</i> move to weave · <b>click</b> to pin a star <em>· double-click to reset</em></div>
+
+  <!-- ambient sound toggle (off by default) -->
+  <button id="sound" data-cursor="link" aria-label="Toggle interface sound" aria-pressed="false" title="Sound off">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 9v6h4l5 4V5L8 9H4z"/>
+      <path class="wave" d="M16.5 9.5a4 4 0 0 1 0 5"/>
+      <path class="wave" d="M19 7a7 7 0 0 1 0 10"/>
+      <path class="slash" d="M3.5 3.5l17 17"/>
+    </svg>
+  </button>
 
   <!-- scroll progress -->
   <div id="progress"><span></span></div>
@@ -112,10 +135,10 @@
     </section>
 
     <!-- CH 3 · EXPERIENCE -->
-    <section class="chapter" data-ch="3" id="ch-experience" data-label="Research">
+    <section class="chapter" data-ch="3" id="ch-experience" data-label="Experience">
       <div class="panel">
         <p class="eyebrow" data-anim>03 — EXPERIENCE</p>
-        <h2 class="h-lg" data-anim>Research Assistant, <em>routing at the edge of the internet.</em></h2>
+        <h2 class="h-lg" data-anim>From <em>routing protocols to threat detection.</em></h2>
         <div class="xp-card" data-anim data-cursor="tilt">
           <div class="xp-head">
             <div>
@@ -124,8 +147,19 @@
             </div>
             <span class="xp-date">Feb 2026 — Present</span>
           </div>
-          <p class="xp-body">Working on <b>EIBP</b> a next-gen intra-AS routing protocol built on MNLR under <b>Prof. Nirmala Shenoy</b>, focused on faster failure detection and lower control overhead than traditional routing approaches. Deployed and tested on the  <b>FABRIC testbed</b>.</p>
+          <p class="xp-body">Working on <b>EIBP</b> a next-gen intra-AS routing protocol built on MNLR under <b>Prof. Nirmala Shenoy</b>, focused on faster failure detection and lower control overhead than traditional routing approaches. Deployed and tested on the <b>FABRIC testbed</b>.</p>
           <div class="chips"><span>FABRIC Testbed</span><span>Python · FabLib</span><span>OSPF / EIBP</span><span>Distributed Systems</span><span>SSH</span></div>
+        </div>
+        <div class="xp-card" data-anim data-cursor="tilt">
+          <div class="xp-head">
+            <div>
+              <h3>Cybersecurity Intern</h3>
+              <p class="xp-org">RV University · Security Research</p>
+            </div>
+            <span class="xp-date">Jun — Jul 2025</span>
+          </div>
+          <p class="xp-body">Built an anomaly-detection pipeline fusing <b>Random Forest</b>, <b>Isolation Forest</b>, entropy filtering and Bloom filters, with a live traffic-simulation dashboard in <b>Dash + Plotly</b>. This work became a <b>Springer conference paper</b>, presented at City Engineering College, Bengaluru.</p>
+          <div class="chips"><span>Random Forest</span><span>Isolation Forest</span><span>Entropy Analysis</span><span>Bloom Filters</span><span>Dash · Plotly</span></div>
         </div>
       </div>
     </section>
@@ -232,6 +266,6 @@
 
   </main>
 
-  <script type="module" src="js/main.js?v=4"></script>
+  <script type="module" src="js/main.js?v=5"></script>
 </body>
 </html>
