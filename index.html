@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rohit Diggi — AI/ML Engineer & Full-Stack Developer</title>
+  <meta name="description" content="Rohit Jaysheel Diggi — AI/ML Engineer, Full-Stack Developer and systems researcher. Agentic AI, LLMs, and network protocol research. A scroll-driven portfolio." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>◈</text></svg>" />
+  <link rel="stylesheet" href="fonts/fonts.css" />
+  <link rel="stylesheet" href="css/style.css?v=2" />
+  <script type="importmap">
+    { "imports": { "three": "./lib/three.module.js" } }
+  </script>
+</head>
+<body>
+
+  <!-- custom cursor -->
+  <div id="cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-label"></div>
+  </div>
+
+  <!-- scroll length driver -->
+  <div id="spacer"></div>
+
+  <!-- 3D stage -->
+  <canvas id="gl"></canvas>
+  <div id="grain" aria-hidden="true"></div>
+  <div id="vignette" aria-hidden="true"></div>
+
+  <!-- easter egg hint -->
+  <div id="hint" aria-hidden="true"><i>✦</i> move to weave · <b>click</b> to pin a star <em>· double-click to reset</em></div>
+
+  <!-- scroll progress -->
+  <div id="progress"><span></span></div>
+
+  <!-- chapter nav dots -->
+  <nav id="nav" aria-label="Section navigation"></nav>
+
+  <!-- top bar -->
+  <header id="topbar">
+    <a class="brand" href="#ch-hero" data-cursor="link">R<span>.</span>D</a>
+    <a class="resume-btn" href="assets/Rohit_Diggi_Resume.pdf" download data-cursor="link">
+      <span>Résumé</span>
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+    </a>
+  </header>
+
+  <!-- fixed UI film layers -->
+  <main id="ui">
+
+    <!-- CH 0 · HERO -->
+    <section class="chapter" data-ch="0" id="ch-hero" data-label="Intro">
+      <div class="hero-center">
+        <p class="kicker" data-anim="0">B.TECH (HONS.) CSE · AI &amp; MACHINE LEARNING · RV UNIVERSITY</p>
+        <h1 class="hero-title">
+          <span class="line" data-anim="1"><span class="w">ROHIT</span></span>
+          <span class="line" data-anim="2"><span class="w accent">DIGGI</span></span>
+        </h1>
+        <p class="hero-sub" data-anim="3">I build <b>agentic AI systems</b>, full-stack products, and I break routing protocols for research. Systems thinker, end-to-end shipper.</p>
+        <div class="hero-tags" data-anim="4">
+          <span>Agentic AI</span><span>LLMs &amp; RAG</span><span>Full-Stack</span><span>Networking Research</span>
+        </div>
+      </div>
+      <div class="scroll-cue" data-anim="5">
+        <span>SCROLL</span>
+        <i></i>
+      </div>
+    </section>
+
+    <!-- CH 1 · ABOUT -->
+    <section class="chapter" data-ch="1" id="ch-about" data-label="About">
+      <div class="panel">
+        <p class="eyebrow" data-anim>01 — WHO</p>
+        <h2 class="h-lg" data-anim>Final-year engineer who ships the <em>whole</em> thing.</h2>
+        <p class="body-lg" data-anim>Final-year B.Tech (Hons.) CSE (AI/ML) at <b>RV University</b>. I own problems end-to-end — agentic AI, full-stack, embedded Android, even routing protocols on a national testbed.</p>
+        <p class="body-lg" data-anim>Currently a <b>Research Assistant</b> with RIT. Prepping hard for SDE roles.</p>
+        <div class="stat-row" data-anim>
+          <div class="stat"><b data-count="8.06" data-dp="2">8.06</b><span>CGPA / 10</span></div>
+          <div class="stat"><b data-count="8">8</b><span>Nationwide · GUVI'26</span></div>
+          <div class="stat"><b data-count="6">6</b><span>Shipped projects</span></div>
+          <div class="stat"><b data-count="1">1</b><span>Springer paper</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 2 · EXPERTISE -->
+    <section class="chapter" data-ch="2" id="ch-skills" data-label="Skills">
+      <div class="panel wide">
+        <p class="eyebrow" data-anim>02 — TOOLKIT</p>
+        <h2 class="h-lg" data-anim>What I reach for.</h2>
+        <div class="skill-grid" data-anim>
+          <div class="skill-cat" data-cursor="tilt">
+            <h3>AI / ML</h3>
+            <ul><li>Agentic AI &amp; orchestration</li><li>LLM integration</li><li>Prompt engineering</li><li>RAG · vector search</li><li>OpenAI / GPT-4.1</li></ul>
+          </div>
+          <div class="skill-cat" data-cursor="tilt">
+            <h3>Full-Stack</h3>
+            <ul><li>React · Vite</li><li>Node.js · Express</li><li>REST API design</li><li>Supabase</li><li>Tailwind CSS</li></ul>
+          </div>
+          <div class="skill-cat" data-cursor="tilt">
+            <h3>Systems &amp; Mobile</h3>
+            <ul><li>Kotlin · Android SDK</li><li>Embedded / head-unit UI</li><li>Network protocols (OSPF)</li><li>Distributed systems</li><li>SSH · Linux</li></ul>
+          </div>
+          <div class="skill-cat" data-cursor="tilt">
+            <h3>Languages &amp; Tooling</h3>
+            <ul><li>Python</li><li>JavaScript / TypeScript</li><li>Kotlin</li><li>Git · Railway · Vercel</li><li>ChromaDB · Streamlit</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 3 · EXPERIENCE -->
+    <section class="chapter" data-ch="3" id="ch-experience" data-label="Research">
+      <div class="panel">
+        <p class="eyebrow" data-anim>03 — EXPERIENCE</p>
+        <h2 class="h-lg" data-anim>Research Assistant, <em>routing at the edge of the internet.</em></h2>
+        <div class="xp-card" data-anim data-cursor="tilt">
+          <div class="xp-head">
+            <div>
+              <h3>Research Assistant — EIBP Protocol</h3>
+              <p class="xp-org">Rochester Institute of Technology · Research</p>
+            </div>
+            <span class="xp-date">Feb 2026 — Present</span>
+          </div>
+          <p class="xp-body">Deployed &amp; validated <b>EIBP</b> — a next-gen intra-AS routing protocol — on the <b>FABRIC testbed</b>. Ran the <b>first successful 13-node experiment</b> and proved lower control overhead and localized failure vs. OSPF.</p>
+          <div class="chips"><span>FABRIC Testbed</span><span>Python · FabLib</span><span>OSPF / EIBP</span><span>Distributed Systems</span><span>SSH</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 4 · PROJECTS -->
+    <section class="chapter" data-ch="4" id="ch-projects" data-label="Projects">
+      <div class="panel wide">
+        <p class="eyebrow" data-anim>04 — SELECTED WORK</p>
+        <h2 class="h-lg" data-anim>Things I built &amp; shipped.</h2>
+        <div class="proj-grid" data-anim>
+
+          <a class="proj" href="https://github.com/Rohx24/guvi-final" target="_blank" rel="noopener" data-cursor="tilt">
+            <div class="proj-top"><span class="proj-tag">🏆 GUVI Top 8</span><span class="proj-arrow">↗</span></div>
+            <h3>Satark.ai — Honeypot API</h3>
+            <p>An AI agent that strings scam callers along to detect fraud and pull intel — numbers, bank details, tactics. Live on Railway.</p>
+            <div class="chips sm"><span>GPT-4.1-mini</span><span>Node.js</span><span>Agentic AI</span></div>
+          </a>
+
+          <a class="proj" href="https://github.com/Rohx24/Drivedash" target="_blank" rel="noopener" data-cursor="tilt">
+            <div class="proj-top"><span class="proj-tag">Solo build</span><span class="proj-arrow">↗</span></div>
+            <h3>DriveDash — Android Car Launcher</h3>
+            <p>A Kotlin launcher that turns any Android tablet into a car head-unit — glanceable tiles, voice-guided nav, tuned for weak hardware.</p>
+            <div class="chips sm"><span>Kotlin</span><span>Android SDK</span><span>Embedded</span></div>
+          </a>
+
+          <a class="proj" href="https://parampara-one.vercel.app" target="_blank" rel="noopener" data-cursor="tilt">
+            <div class="proj-top"><span class="proj-tag">Live · in use</span><span class="proj-arrow">↗</span></div>
+            <h3>BhashaBuddy — Language Learning</h3>
+            <p>A full-stack platform helping NRI kids learn their mother tongue through games — React, Supabase, OpenAI voice practice. Live on Vercel.</p>
+            <div class="chips sm"><span>React</span><span>Supabase</span><span>OpenAI</span></div>
+          </a>
+
+          <div class="proj" data-cursor="tilt">
+            <div class="proj-top"><span class="proj-tag">Team of 4</span></div>
+            <h3>Parallel Risk-Assessment Agents</h3>
+            <p>Four parallel AI agents scoring risk across independent signals — with conflict-resolution and explainable premium recommendations.</p>
+            <div class="chips sm"><span>Agentic AI</span><span>Orchestration</span><span>Explainable AI</span></div>
+          </div>
+
+          <div class="proj" data-cursor="tilt">
+            <div class="proj-top"><span class="proj-tag">Springer · 98% acc</span></div>
+            <h3>Hybrid Deep-Learning IDS</h3>
+            <p>An intrusion detector fusing MLP + AutoEncoder — 98.1% accuracy, fewer false negatives on novel attacks. Springer-published.</p>
+            <div class="chips sm"><span>Deep Learning</span><span>AutoEncoder</span><span>Network Security</span></div>
+          </div>
+
+          <div class="proj" data-cursor="tilt">
+            <div class="proj-top"><span class="proj-tag">Multi-agent</span></div>
+            <h3>AI Boardroom</h3>
+            <p>A boardroom of AI agents — VC, skeptic, CTO, founder — that debate your startup idea from every angle and hand back a scored verdict.</p>
+            <div class="chips sm"><span>Agentic AI</span><span>LLMs</span><span>Orchestration</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CH 5 · ACHIEVEMENTS -->
+    <section class="chapter" data-ch="5" id="ch-awards" data-label="Awards">
+      <div class="panel">
+        <p class="eyebrow" data-anim>05 — RECOGNITION</p>
+        <h2 class="h-lg" data-anim>Proof it works outside my laptop.</h2>
+        <ul class="award-list">
+          <li data-anim data-cursor="tilt">
+            <span class="award-rank">08</span>
+            <div><h3>Top 8 Nationwide — HCL GUVI AI Impact Summit 2026</h3><p>88/100 among <b>15,000+ teams</b> at Bharat Mandapam. Built Satark.ai with Team nol0ck.</p></div>
+          </li>
+          <li data-anim data-cursor="tilt">
+            <span class="award-rank">01</span>
+            <div><h3>1st Prize — Avishkar Project Exhibition</h3><p>Inter-college exhibition (Vemana IT × ISTE × IEEE) for a Traffic Management System.</p></div>
+          </li>
+          <li data-anim data-cursor="tilt">
+            <span class="award-rank">📄</span>
+            <div><h3>Springer-Published Researcher</h3><p>Co-authored &amp; presented a Hybrid AI framework for real-time DDoS detection at SWSIoT-2025.</p></div>
+          </li>
+          <li data-anim data-cursor="tilt">
+            <span class="award-rank">★</span>
+            <div><h3>NPTEL Elite — Affective Computing &amp; Software Testing</h3><p>90/100 and Elite+ distinction across two IIT-run certification courses.</p></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CH 6 · LEETCODE (dormant — rendered only when data is ready) -->
+    <section class="chapter hidden-chapter" data-ch="6" id="ch-leetcode" data-label="LeetCode" hidden>
+      <div class="panel">
+        <p class="eyebrow" data-anim>06 — DSA</p>
+        <h2 class="h-lg" data-anim>Grinding the ladder.</h2>
+        <div id="lc-mount"></div>
+      </div>
+    </section>
+
+    <!-- CH 7 · CONTACT -->
+    <section class="chapter" data-ch="7" id="ch-contact" data-label="Contact">
+      <div class="hero-center">
+        <p class="eyebrow" data-anim>07 — SAY HI</p>
+        <h2 class="contact-title" data-anim>Let's build<br><em>something.</em></h2>
+        <p class="body-lg center" data-anim>Open to SDE / AI-engineering roles &amp; internships. Fastest way to reach me is email.</p>
+        <div class="contact-links" data-anim>
+          <a href="mailto:rohitdiggi@outlook.com" data-cursor="link"><span>Email</span><b>rohitdiggi@outlook.com</b></a>
+          <a href="https://github.com/Rohx24" target="_blank" rel="noopener" data-cursor="link"><span>GitHub</span><b>@Rohx24</b></a>
+          <a href="https://www.linkedin.com/in/rohit-j-d-b38069302/" target="_blank" rel="noopener" data-cursor="link"><span>LinkedIn</span><b>Rohit J. Diggi</b></a>
+          <a href="assets/Rohit_Diggi_Resume.pdf" download data-cursor="link"><span>Download</span><b>Résumé.pdf</b></a>
+        </div>
+        <p class="foot" data-anim>Bengaluru, India · Designed &amp; built by Rohit — no templates.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="js/main.js?v=4"></script>
+</body>
+</html>

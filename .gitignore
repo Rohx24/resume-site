@@ -1,0 +1,8 @@
+.DS_Store
+*.log
+.vscode/
+node_modules/
+
+# Résumé PDF holds personal info (address/DOB/phone) — keep it out of the public repo.
+# Drop a cleaned version at assets/Rohit_Diggi_Resume.pdf locally / on your host.
+assets/*.pdf
