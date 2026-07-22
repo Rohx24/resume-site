@@ -465,6 +465,31 @@ body{ position:relative; }
 }
 
 /* ============================================================
+   MOBILE / SMALL-SCREEN — natural vertical flow (scroll-film off)
+   Sections stack & scroll normally; the 3D mesh stays a fixed backdrop.
+   ============================================================ */
+@media (max-width:900px){
+  html, body{ overflow-x:hidden; }
+  #spacer{ display:none; }
+  #gl{ pointer-events:none; }          /* backdrop only — no tap-to-pin on touch */
+  #hint{ display:none; }
+  #ui{ position:relative; z-index:2; height:auto; pointer-events:auto; }
+  .chapter{
+    position:relative; inset:auto;
+    opacity:1; visibility:visible; transform:none; filter:none;
+    height:auto; min-height:auto; overflow:visible;
+    display:flex; align-items:flex-start; justify-content:center;
+    padding:11vh 5vw 9vh;
+  }
+  #ch-hero{ min-height:100vh; min-height:100svh; align-items:center; padding-top:12vh; }
+  #ch-contact{ align-items:center; }
+  .chapter.hidden-chapter[hidden]{ display:none; }
+  .panel{ padding:1.5rem 1.3rem; }
+  /* honor reveal transforms even though sections are always laid out */
+  [data-anim]{ will-change:opacity, transform; }
+}
+
+/* ============================================================
    PRINT — linearize the scroll-film into a readable document
    ============================================================ */
 @media print{

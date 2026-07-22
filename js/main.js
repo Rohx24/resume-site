@@ -6,6 +6,8 @@ import * as THREE from 'three';
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const coarse = matchMedia('(pointer: coarse)').matches;
+// FLOW = phones / small screens: natural vertical scroll instead of the fixed film
+const FLOW = matchMedia('(max-width: 900px)').matches;
 
 /* ---- feature flag: LeetCode chapter stays dormant until real data ---- */
 const SHOW_LEETCODE = false;   // flip to true (and call renderLeetCode) when ready
@@ -40,11 +42,15 @@ let smooth = 0;     // lerped 0..1
 
 function layout(){
   vh = innerHeight;
-  spacer.style.height = (vh * (1 + (N - 1) * PER)) + 'px';
+  // FLOW mode scrolls the real document; no virtual scroll driver needed
+  spacer.style.height = FLOW ? '0px' : (vh * (1 + (N - 1) * PER)) + 'px';
   onScroll();
 }
 function scrollMax(){ return Math.max(1, spacer.offsetHeight - vh); }
-function onScroll(){ target = Math.min(1, Math.max(0, scrollY / scrollMax())); }
+function docMax(){ return Math.max(1, document.documentElement.scrollHeight - vh); }
+function onScroll(){
+  target = Math.min(1, Math.max(0, scrollY / (FLOW ? docMax() : scrollMax())));
+}
 
 let lastInput = -9999;          // last real user-scroll input (for soft snap)
 addEventListener('scroll', onScroll, { passive:true });
@@ -421,30 +427,32 @@ function frame(now){
   // progress bar
   progress.style.width = (smooth * 100).toFixed(2) + '%';
 
-  // soft snap: when the user stops scrolling, settle onto the nearest chapter
-  // (keeps text crisp instead of resting half-faded between sections)
-  if (!reduce && performance.now() - lastInput > 170){
-    const snapY = Math.round(smooth * (N - 1)) / (N - 1) * scrollMax();
-    if (Math.abs(scrollY - snapY) > 0.5) scrollTo(0, scrollY + (snapY - scrollY) * 0.14);
-  }
-
-  // chapters: linear crossfade + gentle parallax (NO blur → readable)
-  const nearest = Math.round(v);
-  chapters.forEach((ch, i) => {
-    const d = v - i, ad = Math.abs(d);
-    const op = ad >= 1 ? 0 : (1 - ad);
-    ch.style.opacity = op.toFixed(3);
-    ch.style.visibility = op > 0.02 ? 'visible' : 'hidden';
-    if (!reduce) ch.style.transform = `translateY(${d * -20}px) scale(${1 - ad * 0.02})`;
-    // reveal replay
-    const isActive = i === nearest && op > 0.55;
-    if (isActive !== lastFadeState[i]){
-      lastFadeState[i] = isActive;
-      reveal(ch, isActive);
-      if (isActive && !counted[i]){ counted[i] = true; countUp(ch); }
+  // --- FLOW mode: skip the fixed-film crossfade/snap; the page scrolls naturally
+  // (reveals are handled by IntersectionObserver, chapters stay fully visible) ---
+  if (!FLOW){
+    // soft snap: when the user stops scrolling, settle onto the nearest chapter
+    if (!reduce && performance.now() - lastInput > 170){
+      const snapY = Math.round(smooth * (N - 1)) / (N - 1) * scrollMax();
+      if (Math.abs(scrollY - snapY) > 0.5) scrollTo(0, scrollY + (snapY - scrollY) * 0.14);
     }
-    navBtns[i]?.classList.toggle('active', i === nearest);
-  });
+    // chapters: linear crossfade + gentle parallax (NO blur → readable)
+    const nearest = Math.round(v);
+    chapters.forEach((ch, i) => {
+      const d = v - i, ad = Math.abs(d);
+      const op = ad >= 1 ? 0 : (1 - ad);
+      ch.style.opacity = op.toFixed(3);
+      ch.style.visibility = op > 0.02 ? 'visible' : 'hidden';
+      if (!reduce) ch.style.transform = `translateY(${d * -20}px) scale(${1 - ad * 0.02})`;
+      // reveal replay
+      const isActive = i === nearest && op > 0.55;
+      if (isActive !== lastFadeState[i]){
+        lastFadeState[i] = isActive;
+        reveal(ch, isActive);
+        if (isActive && !counted[i]){ counted[i] = true; countUp(ch); }
+      }
+      navBtns[i]?.classList.toggle('active', i === nearest);
+    });
+  }
 
   // 3D — node drift
   if (renderer){
@@ -568,5 +576,20 @@ if (SHOW_LEETCODE) renderLeetCode(/* pass stats here */);
 initGL();
 layout();
 requestAnimationFrame(frame);
-// first chapter reveal on load
-setTimeout(() => { lastFadeState[0] = true; reveal(chapters[0], true); }, 120);
+
+if (FLOW){
+  // natural document flow → reveal each section as it scrolls into view
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const i = chapters.indexOf(en.target);
+      reveal(en.target, true);
+      if (i >= 0 && !counted[i]){ counted[i] = true; countUp(en.target); }
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  chapters.forEach(ch => io.observe(ch));
+} else {
+  // first chapter reveal on load (fixed-film mode)
+  setTimeout(() => { lastFadeState[0] = true; reveal(chapters[0], true); }, 120);
+}
