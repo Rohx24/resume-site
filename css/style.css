@@ -7,9 +7,9 @@
   --bg-soft:   #0a0d14;
   --panel:     rgba(16,20,30,0.55);
   --panel-bd:  rgba(255,255,255,0.08);
-  --ink:       #fbfdff;
-  --ink-dim:   #c3ccdb;
-  --ink-faint: #7d8799;
+  --ink:       #ffffff;
+  --ink-dim:   #dde3ee;
+  --ink-faint: #9aa4b6;
   --accent:    #4fe3ff;
   --accent-2:  #a688ff;
   --accent-3:  #34e6b0;
@@ -54,7 +54,7 @@ body{ position:relative; }
 }
 #vignette{
   position:fixed; inset:0; z-index:1; pointer-events:none;
-  background:radial-gradient(120% 120% at 50% 45%, transparent 55%, rgba(0,0,0,0.55) 100%);
+  background:radial-gradient(125% 125% at 50% 45%, transparent 62%, rgba(0,0,0,0.32) 100%);
 }
 
 /* ---------- UI film ---------- */
